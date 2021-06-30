@@ -1,0 +1,70 @@
+
+while True:
+    try:
+        ticket = int(input("Введите количество билетов  :"))
+    except ValueError as e:
+        print('Вы ввели невалидные данные')
+    else:
+        if ticket > 0:
+            break
+        else:
+            print("Вы ввели 0 или отрицательное число")
+            continue
+
+age = []
+
+while True:
+    try:
+        for i in range(ticket):
+            a =(int(input(f"Введите возраст для билета № {i + 1}  :")))
+            if a >= 0:
+                age.append(a)
+            if a >= 100:
+                print("Введён слишком большой возраст")
+            else:
+                print(f"В билете № {i + 1} Введён неправельный возраст ")
+            continue
+    except ValueError as e:
+        print('Вы ввели невалидные данные')
+    else:
+        i =+ 1
+        break
+
+costs = []
+
+for i, value in enumerate(age): 
+    if value > 0:
+        if  0 < value < 18:
+            costs.append(0)
+            i =+ 1
+        if 18 <= value < 25:
+            costs.append(990)
+            i =+ 1
+        if value >= 25:
+            costs.append(1390)
+            i =+ 1
+    else:
+        continue
+
+print("----------------\n")
+
+if ticket >= 3:
+    print("Cумма к оплате", sum(costs) - (sum(costs) / 100 * 10) , "руб. Действует скидка 10 %\n Сумма скидки :",(sum(costs) / 100 * 10))
+else:
+    print("Cумма к оплате", sum(costs))
+
+age_0_18 = []
+age_18_25 =[]
+age_25_over = []
+
+for i, value in enumerate(costs): 
+    if value == 0:
+        age_0_18.append(i)
+    elif value == 990:
+        age_18_25.append(i)
+    elif value == 1390:
+        age_25_over.append(i)
+
+print(len(age_0_18), "шт. Билет(а) от 0 до 18 лет")
+print(len(age_18_25), "шт. Билет(а) от 18 до 25 лет")
+print(len(age_25_over), "шт. Билет(а) от 25 + лет")
